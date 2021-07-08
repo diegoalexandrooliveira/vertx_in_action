@@ -40,7 +40,7 @@ public class HttpServer extends AbstractVerticle {
             response.write("data: " + message.body().encode() + "\n\n");
         });
 
-        var timeoutStream = vertx.periodicStream(1000);
+        var timeoutStream = vertx.periodicStream(5000);
         timeoutStream.handler(id ->
                 vertx.eventBus().<JsonObject>request("sensor.average", "", reply -> {
                     if (reply.succeeded()) {
