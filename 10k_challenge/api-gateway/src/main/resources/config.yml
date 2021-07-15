@@ -1,0 +1,6 @@
+api_gateway:
+  path: "/api/v1"
+  port: 8080
+register:
+  port: 8081
+  host: "localhost"
