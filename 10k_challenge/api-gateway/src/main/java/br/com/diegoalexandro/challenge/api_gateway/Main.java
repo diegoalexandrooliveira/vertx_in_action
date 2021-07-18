@@ -6,7 +6,9 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main {
 
     public static void main(String[] args) {
@@ -21,11 +23,13 @@ public class Main {
         configRetriever
                 .getConfig()
                 .onSuccess(config -> {
+                    log.info("Configurações recuperadas com sucesso. Iniciando verticles.");
                     var deploymentOptions = new DeploymentOptions().setConfig(config);
                     vertx.deployVerticle(ApiGatewayVerticle.class.getName(), deploymentOptions);
                 })
                 .onFailure(handler -> {
-
+                    log.error("Problema ao recuperar as configurações. {}", handler.getMessage());
+                    System.exit(1);
                 });
     }
 }

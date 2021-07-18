@@ -4,3 +4,6 @@ api_gateway:
 register:
   port: 8081
   host: "localhost"
+steps:
+  port: 8082
+  host: "localhost"
